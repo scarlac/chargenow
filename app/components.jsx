@@ -61,13 +61,11 @@ let Login = ({dispatch, loginLoading}) => {
 	let username, password;
 	// 
 	return (
-		<form onSubmit={ e => { e.preventDefault(); dispatch({ type: 'SUBMIT_LOGIN', payload: { username: username.value, password: password.value }}); } }>
-			Username: <input type="text" ref={ e => { username = e }} placeholder="user@name" /><br/>
-			Password: <input type="password"  ref={ e => { password = e }} placeholder="p4ssw0rd" /><br/>
-			<input type="submit" value="Login" />
+		<form onSubmit={ e => { e.preventDefault(); dispatch({ type: 'SUBMIT_LOGIN' }); } }>
+			<input type="submit" value="Load chargers" />
 
 			<div style={{ display: loginLoading ? '' : 'none' }}>
-				Logging in and loading chargers...
+				Loading chargers...
 			</div>
 		</form>
 	);
