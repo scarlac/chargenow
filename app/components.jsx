@@ -57,21 +57,16 @@ let Car = ({data}) => {
 	);
 };
 
-let Login = ({dispatch, loginLoading}) => {
-	let username, password;
-	// 
-	return (
-		<form onSubmit={ e => { e.preventDefault(); dispatch({ type: 'SUBMIT_LOGIN' }); } }>
-			<input type="submit" value="Load chargers" />
+let Login = ({dispatch, loginLoading}) =>
+	<form onSubmit={ e => { e.preventDefault(); dispatch({ type: 'SUBMIT_LOGIN' }); } }>
+		<input type="submit" value="Load chargers" />
 
-			<div style={{ display: loginLoading ? '' : 'none' }}>
-				Loading chargers...
-			</div>
-		</form>
-	);
-};
+		<div style={{ display: loginLoading ? '' : 'none' }}>
+			Loading chargers...
+		</div>
+	</form>
 
-let App = (({children}) => 
+let App = ({children}) => 
 	<div>
 		<nav>
 			<Link to="/login" activeClassName="active">ChargeNow</Link>
@@ -79,6 +74,5 @@ let App = (({children}) =>
 		</nav>
 		{children}
 	</div>
-);
 
 export { Car, Cars, Login, App };
