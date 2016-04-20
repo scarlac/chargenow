@@ -6,8 +6,8 @@ import { takeEvery } from 'redux-saga'
 import { put, call } from 'redux-saga/effects'
 import { push } from 'react-router-redux'
 
-// Domain of local drive-now.com API proxy. Change to suit your local setup, e.g. 192.168.99.100:8080
-var siteDomain = 'http://docker.dev:8080';
+// Domain of local drive-now.com API proxy. Change to suit your local setup, e.g. 'http://example.com'
+var siteDomain = '';
 var apiKey = 'adf51226795afbc4e7575ccc124face7'; // Can be scraped from https://dk.drive-now.com/#!/carsharing/copenhagen
 
 function* loadGpsSaga() {
