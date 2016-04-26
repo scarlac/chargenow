@@ -45,7 +45,7 @@ function* loadCarsSaga(action) {
 }
 
 export default function* rootSaga() {
-	yield fork(takeEvery, ['LOAD_CARS', 'RELOAD'], loginSaga);
+	yield fork(takeEvery, ['LOAD_CARS', 'RELOAD'], loadCarsSaga);
 	yield fork(takeEvery, 'LOAD_GPS', loadGpsSaga);
-	yield fork(takeEvery, 'SUBMIT_LOGIN', loadCarsSaga);
+	yield fork(takeEvery, 'SUBMIT_LOGIN', loginSaga);
 }
