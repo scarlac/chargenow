@@ -15,7 +15,7 @@ import createEngine from 'redux-storage-engine-localstorage';
 import { appReducer, initialState } from './reducers'
 import { App } from './components'
 import { Cars, Login } from './containers'
-import sagas from './sagas'
+import rootSaga from './sagas'
 
 let reducer = storage.reducer(combineReducers({
 	app: appReducer,
@@ -25,10 +25,11 @@ let reducer = storage.reducer(combineReducers({
 const storageEngine = createEngine('applicationState');
 
 var history = hashHistory;
+let sagaMiddleware = createSagaMiddleware();
 
 let middlewares = [
 	routerMiddleware(history),
-	createSagaMiddleware(...sagas),
+	sagaMiddleware,
 	storage.createMiddleware(storageEngine)
 ];
 
@@ -36,6 +37,8 @@ let store = compose(
 	applyMiddleware(...middlewares),
 	window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)(reducer);
+
+sagaMiddleware.run(rootSaga);
 
 // Note: We cannot use JSX for routes due to this bug:
 // https://github.com/reactjs/react-router/issues/2704
