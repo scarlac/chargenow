@@ -33,22 +33,15 @@ function* loadCarsSaga(action) {
 	if(action.type == 'RELOAD')
 		yield put({ type: 'LOAD_GPS' });
 
-	let req, cars;
 	try {
-		req = yield call(fetch, siteDomain + '/cities?expand=full', {
+		let req = yield call(fetch, siteDomain + '/cities?expand=full', {
 			headers: { 'X-Api-Key': apiKey } // API key is not tied to a specific account
 		});
+		let cars = (yield req.json()).cars.items;
+		yield put({ type: 'CARS_RECEIVED', payload: { cars } });
 	} catch(error) {
 		alert('Could not load chargers from webservice: ' + error);
 	}
-	
-	try {
-		cars = (yield req.json()).cars.items;
-	} catch(error) {
-		alert('Data on chargers was not loaded correctly: ' + error);
-	}
-
-	yield put({ type: 'CARS_RECEIVED', payload: { cars } });
 }
 
 export default function* rootSaga() {
